@@ -6,7 +6,7 @@
 /*   By: amacarul <amacarul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:40:28 by amacarul          #+#    #+#             */
-/*   Updated: 2024/10/07 13:27:35 by amacarul         ###   ########.fr       */
+/*   Updated: 2024/10/08 10:06:43 by amacarul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,6 @@ size_t	ft_strlen(const char *s)
 	while (s[count])
 		count ++;
 	return (count);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*dup;
-	char	*start_dup;
-
-	if (s == NULL)
-		return (NULL);
-	dup = (char *)malloc(ft_strlen(s) + 1);
-	if (dup == NULL)
-		return (NULL);
-	start_dup = dup;
-	while (*s)
-	{
-		*dup = *s;
-		dup ++;
-		s ++;
-	}
-	*dup = '\0';
-	return (start_dup);
 }
 
 char	*ft_strjoin(char *s1, char *s2)

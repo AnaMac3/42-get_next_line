@@ -6,7 +6,7 @@
 /*   By: amacarul <amacarul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:29:30 by amacarul          #+#    #+#             */
-/*   Updated: 2024/10/07 16:17:14 by amacarul         ###   ########.fr       */
+/*   Updated: 2024/10/08 10:42:52 by amacarul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*join_and_free(char *s1, char *s2)
 {
 	char	*joined;
 
-	if (s1 == NULL)
-		return (ft_strdup(s2));
 	joined = ft_strjoin(s1, s2);
 	free(s1);
 	return (joined);
@@ -98,3 +96,89 @@ char	*get_next_line(int fd)
 	line = NULL;
 	return (read_until_newline(fd, buffer, line));
 }
+
+//Main 1: normal
+/*
+int	main()
+{
+	int fd = open("texto1.txt", O_RDWR | O_CREAT | O_APPEND, 0644);
+	if (fd == -1)
+	{
+		printf("Error al abrir el archivo\n");
+		return (1);
+	}
+	char	*line = get_next_line(fd);
+	//Imprimir solo una línea
+	//printf("%s", line);
+	while (line != NULL)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	//Probamos a añadir cosas al file, se supone que get_next_line tiene
+	//comportamiento indet si el archivo cambia desde la última llamada
+	printf("\nAhora vamos a añadir una nueva línea al fd\n");
+	char *append_line = "\nEsta es una línea añadida\n";
+	ssize_t append_bytes = write(fd, append_line, ft_strlen(append_line));
+	if (append_bytes == -1)
+	{
+		printf("Error al escribir el archivo\n");
+		close(fd);
+		return (1);
+	}
+	else
+	{
+		printf("La nueva línea se ha añadido correctamente\n");
+		line = get_next_line(fd);
+		printf("Línea añadida: %s", line);
+	}
+	close(fd);
+	return (0);
+}
+*/
+//Main 2: hay que pasarle el file al ejecutar
+/*
+int main(int argc, char **argv)
+{
+	if (argc != 2)
+	{
+		printf("Error, introduce el nombre fd a leer\n");
+		return (1);
+	}
+	int fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error al abrir el archivo\n");
+		return (1);
+	}
+	char	*line = get_next_line(fd);
+	while (line != NULL)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+
+	close(fd);
+	return (0);
+}*/
+
+//Main 3: stdin
+/*
+int main()
+{
+	char	*line = get_next_line(0);
+	if (line == NULL)
+	{
+		printf("Error, especifica archivo válido\n");
+		return (1);
+	}
+	while (line != NULL)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(0);
+	}
+	return (0);
+}*/
